@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Name — Resume</title>
+
+  <!--
+    ============================================================
+    HOW TO EDIT THIS RESUME (read me first — no coding needed!)
+    ============================================================
+    1. To change the TEXT: find the words on the page below and
+       simply type over them. Look for text between > and < .
+       Example:  <h4>Your Role</h4>  ->  <h4>Project Manager</h4>
+
+    2. To change a SKILL/LANGUAGE BAR: find  style="width: 88%"
+       and change the number. 100% = full bar, 0% = empty bar.
+
+    3. To add YOUR PHOTO:
+         - Put your photo file (e.g. "photo.jpg") in the same
+           folder as this file.
+         - Find the word  data-photo  below (near the top of the
+           page) and replace  ""  with  "photo.jpg".
+           Example: data-photo="photo.jpg"
+         - If you leave it empty, a neat placeholder shows instead.
+
+    4. Everything (style, icons, placeholder picture) lives inside
+       THIS ONE FILE, so it works online AND offline. Just open it
+       in any web browser. Nothing else to install.
+    ============================================================
+  -->
+
+  <style>
+    /* ---------- DESIGN SETTINGS (edit colours here) ----------
+       These are the only colours used. Change them once here and
+       the whole page updates. Calm, soft, high-readability palette
+       chosen to be comfortable for everyone, including readers with
+       dyslexia or autism (no harsh white, no bright clashes). */
+    :root {
+      --ink:        #2b2f36;   /* main text colour */
+      --ink-soft:   #5a626d;   /* secondary text  */
+      --accent:     #3f6f8f;   /* headings / bars (calm blue)   */
+      --accent-dark:#2f5468;
+      --sidebar-bg: #2f3a44;   /* left column background */
+      --sidebar-tx: #e9edf1;   /* left column text       */
+      --page-bg:    #eef1f4;   /* page background        */
+      --card-bg:    #ffffff;   /* resume sheet background*/
+      --bar-track:  #d8dee4;   /* empty part of a bar    */
+      --line:       #e2e6ea;   /* thin divider lines     */
+    }
+
+    /* ---------- BASE / RESET ---------- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      /* System fonts: sleek, elegant, no download needed, so the
+         page loads instantly online or offline. */
+      font-family: "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      font-size: 16px;
+      line-height: 1.65;          /* roomy lines = easier reading */
+      letter-spacing: 0.15px;
+      color: var(--ink);
+      background: var(--page-bg);
+      padding: 28px 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---------- LAYOUT ---------- */
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1000px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(43, 47, 54, 0.10);
+    }
+
+    /* LEFT column: contact, education, languages */
+    .left {
+      flex: 1 1 290px;
+      min-width: 270px;
+      background: var(--sidebar-bg);
+      color: var(--sidebar-tx);
+      padding: 34px 26px;
+    }
+
+    /* RIGHT column (main body): profile, experience, skills, interests */
+    .right {
+      flex: 2 1 460px;
+      min-width: 300px;
+      padding: 38px 34px;
+    }
+
+    /* ---------- PROFILE / PHOTO ---------- */
+    .profile {
+      text-align: center;
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      overflow: hidden;                     /* keeps the photo inside the circle */
+      background: #cfd8df;
+      border: 4px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    }
+
+    /* The picture ALWAYS fills the whole circular container */
+    .profile-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .profile h1 {
+      font-size: 1.55rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .profile .role {
+      display: block;
+      margin-top: 6px;
+      font-size: 1rem;
+      font-weight: 400;
+      color: #b9c6d1;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ---------- SIDEBAR SECTIONS ---------- */
+    .side-section { margin-bottom: 30px; }
+    .side-section:last-child { margin-bottom: 0; }
+
+    .side-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .side-section ul { list-style: none; }
+
+    /* Contact list rows */
+    .contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+      word-break: break-word;          /* long emails/links never overflow */
+    }
+    .contact .icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      color: #b9c6d1;
+    }
+    .contact a {
+      color: var(--sidebar-tx);
+      text-decoration: none;
+    }
+    .contact a:hover, .contact a:focus { text-decoration: underline; }
+
+    /* Education list */
+    .education li { margin-bottom: 18px; }
+    .education li:last-child { margin-bottom: 0; }
+    .education .years {
+      font-size: 0.85rem;
+      color: #9fb0bd;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+    .education .degree { font-size: 1rem; font-weight: 600; }
+    .education .place  { font-size: 0.92rem; font-weight: 400; color: #cdd7df; }
+
+    /* Language + skill progress bars share this look */
+    .bar-item { margin-bottom: 14px; }
+    .bar-item .bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+    .bar-track {
+      width: 100%;
+      height: 8px;
+      background: var(--bar-track);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    /* sidebar bars sit on a dark background, so the track is darker */
+    .left .bar-track { background: rgba(255, 255, 255, 0.18); }
+    .bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 6px;
+    }
+    .left .bar-fill { background: #8fb4cb; }
+
+    /* ---------- MAIN BODY SECTIONS ---------- */
+    .section { margin-bottom: 34px; }
+    .section:last-child { margin-bottom: 0; }
+
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--accent-dark);
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .section-title + .title-rule {
+      width: 52px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 3px;
+      margin-bottom: 18px;
+    }
+
+    .section p { color: var(--ink-soft); }
+
+    /* Experience entries */
+    .exp-item {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 24px;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+    .exp-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .exp-meta { flex: 0 0 150px; }
+    .exp-meta .years   { font-size: 0.9rem; color: var(--accent); font-weight: 600; }
+    .exp-meta .company { font-size: 0.92rem; color: var(--ink-soft); }
+    .exp-detail { flex: 1 1 260px; }
+    .exp-detail h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; }
+
+    /* Interests */
+    .interests ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 28px;
+    }
+    .interests li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1rem;
+    }
+    .interests .icon { width: 22px; height: 22px; color: var(--accent); flex-shrink: 0; }
+
+    /* ---------- ACCESSIBILITY ---------- */
+    /* Clear keyboard-focus outline for people navigating by keyboard */
+    a:focus-visible { outline: 3px solid #ffd27d; outline-offset: 2px; }
+
+    /* Respect users who prefer no motion */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+
+    /* ---------- PRINT (Save as PDF looks tidy) ---------- */
+    @media print {
+      body { background: #fff; padding: 0; }
+      .container { box-shadow: none; border-radius: 0; max-width: 100%; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- =================================================================
+       THE RESUME STARTS HERE
+       Left column = sidebar | Right column = main body
+       ================================================================= -->
+  <main class="container">
+
+    <!-- ===================== LEFT SIDEBAR ===================== -->
+    <aside class="left">
+
+      <!-- PROFILE PICTURE + NAME -->
+      <!-- To add your photo: change data-photo="" to data-photo="photo.jpg" -->
+      <section class="profile">
+        <div class="profile-img" id="profileImg" data-photo="">
+          <!-- A placeholder picture (drawn here as SVG) shows automatically
+               when no photo file is provided, so the circle is never empty. -->
+          <svg viewBox="0 0 150 150" width="150" height="150" role="img"
+               aria-label="Profile photo placeholder">
+            <rect width="150" height="150" fill="#cfd8df"/>
+            <circle cx="75" cy="58" r="28" fill="#9aa9b5"/>
+            <path d="M30 140c0-28 20-44 45-44s45 16 45 44z" fill="#9aa9b5"/>
+          </svg>
+        </div>
+        <h1>Your Name <span class="role">Web Developer</span></h1>
+      </section>
+
+      <!-- CONTACT INFO -->
+      <section class="side-section contact">
+        <h2 class="side-title">Contact Info</h2>
+        <ul>
+          <li>
+            <!-- phone icon -->
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .58 3.6 1 1 0 0 1-.25 1z" fill="currentColor"/>
+            </svg>
+            <span class="text"><a href="tel:+12345678990">+1 234 5678 90</a></span>
+          </li>
+          <li>
+            <!-- mail icon -->
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+              <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="2" fill="none"/>
+            </svg>
+            <span class="text"><a href="/cdn-cgi/l/email-protection#027b6d777042676f636b6e2c616d6f"><span class="__cf_email__" data-cfemail="84fdebf1f6c4e1e9e5ede8aae7ebe9">[email&#160;protected]</span></a></span>
+          </li>
+          <li>
+            <!-- globe icon -->
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+              <path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18" stroke="currentColor" stroke-width="2" fill="none"/>
+            </svg>
+            <span class="text"><a href="https://www.mywebsite.com" target="_blank" rel="noopener">www.mywebsite.com</a></span>
+          </li>
+          <li>
+            <!-- linkedin icon -->
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.6 8.65 22 11 22 14.6V21h-4v-5.7c0-1.36-.02-3.1-1.9-3.1-1.9 0-2.2 1.48-2.2 3v5.8H9z" fill="currentColor"/>
+            </svg>
+            <span class="text"><a href="https://www.linkedin.com/in/yourname" target="_blank" rel="noopener">linkedin.com/in/yourname</a></span>
+          </li>
+          <li>
+            <!-- location icon -->
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 22s7-7.6 7-12a7 7 0 1 0-14 0c0 4.4 7 12 7 12z" stroke="currentColor" stroke-width="2"/>
+              <circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            <span class="text">City, Region, Country</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- EDUCATION -->
+      <section class="side-section education">
+        <h2 class="side-title">Education</h2>
+        <ul>
+          <li>
+            <p class="years">2018 &ndash; 2022</p>
+            <p class="degree">B.Sc. in Computer Science</p>
+            <p class="place">University Name</p>
+          </li>
+          <li>
+            <p class="years">2016 &ndash; 2018</p>
+            <p class="degree">Senior High School</p>
+            <p class="place">School / College Name</p>
+          </li>
+          <li>
+            <p class="years">2012 &ndash; 2016</p>
+            <p class="degree">Junior High School</p>
+            <p class="place">School Name</p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- LANGUAGES -->
+      <section class="side-section languages">
+        <h2 class="side-title">Languages</h2>
+
+        <div class="bar-item">
+          <div class="bar-label"><span>English</span><span>85%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width: 85%"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>Spanish</span><span>25%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width: 25%"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>Cebuano</span><span>75%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width: 75%"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>Tagalog</span><span>85%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width: 85%"></div></div>
+        </div>
+      </section>
+
+    </aside>
+
+    <!-- ===================== RIGHT / MAIN BODY ===================== -->
+    <div class="right">
+
+      <!-- PROFILE -->
+      <section class="section">
+        <h2 class="section-title">Profile</h2>
+        <div class="title-rule"></div>
+        <p>
+          Detail-oriented Web Developer with a passion for building clean,
+          accessible, and user-friendly websites. Experienced in turning ideas
+          into reliable, well-structured code, and comfortable working both
+          independently and as part of a team. Always eager to keep learning and
+          to deliver work that is both functional and elegant.
+        </p>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section class="section">
+        <h2 class="section-title">Experience</h2>
+        <div class="title-rule"></div>
+
+        <div class="exp-item">
+          <div class="exp-meta">
+            <p class="years">2022 &ndash; Present</p>
+            <p class="company">Organization Name</p>
+          </div>
+          <div class="exp-detail">
+            <h3>Web Developer</h3>
+            <p>Built and maintained responsive websites, improved page-load
+               performance, and collaborated with designers to deliver
+               accessible, on-brand user interfaces.</p>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-meta">
+            <p class="years">2020 &ndash; 2022</p>
+            <p class="company">Organization Name</p>
+          </div>
+          <div class="exp-detail">
+            <h3>Junior Developer</h3>
+            <p>Supported the development team in writing and testing features,
+               fixing bugs, and documenting code to keep projects organised
+               and maintainable.</p>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-meta">
+            <p class="years">2018 &ndash; 2020</p>
+            <p class="company">Organization Name</p>
+          </div>
+          <div class="exp-detail">
+            <h3>Web Design Intern</h3>
+            <p>Assisted in creating layouts and graphics, learned modern
+               front-end practices, and contributed to small client projects
+               under senior guidance.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROFESSIONAL SKILLS -->
+      <section class="section skills">
+        <h2 class="section-title">Professional Skills</h2>
+        <div class="title-rule"></div>
+
+        <div class="bar-item">
+          <div class="bar-label"><span>HTML</span><span>88%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width: 88%"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>CSS</span><span>82%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width: 82%"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>React</span><span>78%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width: 78%"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>Java</span><span>75%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width: 75%"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>SQL</span><span>75%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width: 75%"></div></div>
+        </div>
+      </section>
+
+      <!-- INTERESTS -->
+      <section class="section interests">
+        <h2 class="section-title">Interests</h2>
+        <div class="title-rule"></div>
+        <ul>
+          <li>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 5a2 2 0 0 1 2-2h6v16H6a2 2 0 0 0-2 2zM20 5a2 2 0 0 0-2-2h-6v16h6a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+            Reading
+          </li>
+          <li>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M8 21h8M9 6 5 3M15 6l4-3" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+            Anime
+          </li>
+          <li>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+            History, Sciences &amp; Arts
+          </li>
+          <li>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 13a8 8 0 0 1 16 0M4 13v3a2 2 0 0 0 2 2h1v-5H6a2 2 0 0 0-2 2zM20 13v3a2 2 0 0 1-2 2h-1v-5h1a2 2 0 0 1 2 0z" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+            Listening to Music
+          </li>
+        </ul>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ============================================================
+       Tiny helper: shows YOUR photo if you set data-photo="photo.jpg".
+       If the file is missing or empty, the SVG placeholder stays.
+       (Plain, beginner-friendly JavaScript — and the page works fine
+       even if JavaScript is turned off.)
+       ============================================================ -->
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    (function () {
+      var box = document.getElementById("profileImg");
+      if (!box) return;
+      var src = box.getAttribute("data-photo");
+      if (!src) return; // no photo set -> keep the placeholder
+
+      var img = new Image();
+      img.alt = "Profile photo";
+      img.onload = function () {
+        box.innerHTML = "";   // remove the placeholder
+        box.appendChild(img); // CSS makes it fill the circle
+      };
+      // If the photo file can't be found, do nothing: placeholder remains.
+      img.src = src;
+    })();
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0453836fecda29d',t:'MTc4MDIyMjU0OQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
